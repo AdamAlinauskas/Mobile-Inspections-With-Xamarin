@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+inspection/titleLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Title:" />
+            <EditText
+                android:id="@+inspection/title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:layout_below="@inspection/titleLabel"
+                android:hint="Title" />
+            <TextView
+                android:id="@+inspection/locationLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="location:" />
+            <EditText
+                android:id="@+inspection/location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:layout_below="@inspection/locationLabel"
+                android:hint="location:" />
+            <Button
+                android:id="@+inspection/takePicture"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Take picture" />
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="300.0dp"
+                android:id="@+inspection/imageView1"
+                android:adjustViewBounds="true" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <Button
+                    android:id="@+inspection/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@inspection/location"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dip"
+                    android:text="OK" />
+                <Button
+                    android:id="@+inspection/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@inspection/ok"
+                    android:layout_alignTop="@inspection/ok"
+                    android:text="Cancel" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
