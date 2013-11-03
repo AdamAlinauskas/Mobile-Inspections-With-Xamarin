@@ -1,10 +1,12 @@
-﻿using Android.App;
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
 using MobileInspection.Core;
 using System.Linq;
 using MobileInspection.Core.Core;
+using MobileInspection.Core.Dtos;
 
 namespace MobileInspectionXamarin
 {
@@ -12,7 +14,7 @@ namespace MobileInspectionXamarin
     public class InspectionListing : Activity
     {
         private ListView listView;
-        private string[] Inspections;
+        private List<InspectionListingDto> Inspections;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,18 +30,18 @@ namespace MobileInspectionXamarin
         {
             var inspectionToEdit = Inspections[e.Position];
             
-//            var inspectionIntent = new Intent(this, typeof(Inspection));
-//            inspectionIntent.PutExtra("Inspection", inspectionToEdit);
-//            StartActivity(inspectionIntent);  
-//
-//            StartActivity(typeof(Inspection));
+            var inspectionIntent = new Intent(this, typeof(Inspection));
+            inspectionIntent.PutExtra("isEdit", true);
+            inspectionIntent.PutExtra("IdOfInspectionToEdit", inspectionToEdit.Id);
+            StartActivity(inspectionIntent);  
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            Inspections = new InspectionTask().GetInspectionNames();
-            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, Inspections);
+            Inspections = new InspectionTask().GetInspectionForListing();
+            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, Inspections.Select(
+                x => x.Title).ToArray());
             listView.Adapter = listAdapter;
         }
 

@@ -59,6 +59,9 @@
       <Link>Core\InspectionTask.cs</Link>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="..\MobileInspection.Core\Dtos\InspectionListingDto.cs">
+      <Link>Dtos\InspectionListingDto.cs</Link>
+    </Compile>
     <Compile Include="BitMapHelper.cs" />
     <Compile Include="Inspection.cs" />
     <Compile Include="InspectionListing.cs" />

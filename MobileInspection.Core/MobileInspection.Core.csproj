@@ -42,6 +42,7 @@
     <Compile Include="Core\Inspection.cs" />
     <Compile Include="Core\InspectionRepository.cs" />
     <Compile Include="Core\InspectionTask.cs" />
+    <Compile Include="Dtos\InspectionListingDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
