@@ -50,7 +50,12 @@ namespace MobileInspectionXamarin
             var ok = FindViewById<Button>(Resource.Inspection.ok);
             var title = FindViewById<TextView>(Resource.Inspection.title);
             var location = FindViewById<TextView>(Resource.Inspection.location);
-            ok.Click += (o, e) => { new InspectionTask().Save(title.Text, location.Text);Finish();};
+            ok.Click += (o, e) => { new InspectionTask().Save(title.Text, location.Text,GetFilePath());Finish();};
+        }
+
+        private string GetFilePath()
+        {
+            return file != null ? file.AbsolutePath : string.Empty;
         }
 
         private void SetTakePictureButton()
@@ -80,7 +85,7 @@ namespace MobileInspectionXamarin
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
 
-            file = new File(dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
+            file = new File(dir, String.Format("inspection_{0}.jpg", Guid.NewGuid()));
 
             intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(file));
 
@@ -89,6 +94,9 @@ namespace MobileInspectionXamarin
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
+            if (resultCode == Result.Canceled)
+                return;
+
             base.OnActivityResult(requestCode, resultCode, data);
 
             // make it available in the gallery

@@ -49,12 +49,15 @@
   <ItemGroup>
     <Compile Include="..\MobileInspection.Core\Core\Inspection.cs">
       <Link>Core\Inspection.cs</Link>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="..\MobileInspection.Core\Core\InspectionRepository.cs">
       <Link>Core\InspectionRepository.cs</Link>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="..\MobileInspection.Core\Core\InspectionTask.cs">
       <Link>Core\InspectionTask.cs</Link>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitMapHelper.cs" />
     <Compile Include="Inspection.cs" />
@@ -87,7 +90,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties ProjectLinkReference="8bc26ce8-bf83-4924-8ae6-373135e9c666" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="8bc26ce8-bf83-4924-8ae6-373135e9c666" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

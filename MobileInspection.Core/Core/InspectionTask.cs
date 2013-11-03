@@ -9,9 +9,9 @@ namespace MobileInspection.Core.Core
             return new InspectionRepository().All().Select(x => x.Title).ToArray();
         }
 
-        public void Save(string title, string location)
+        public void Save(string title, string location, string filePath)
         {
-            new InspectionRepository().Save(new Inspection{Title = title});
+            new InspectionRepository().Save(new Inspection{Title = title, Location = location, FilePath = filePath});
         }
     }
 }
