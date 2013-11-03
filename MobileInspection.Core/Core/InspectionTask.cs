@@ -15,5 +15,10 @@ namespace MobileInspection.Core.Core
         {
             new InspectionRepository().Save(new Inspection{Title = title, Location = location, FilePath = filePath});
         }
+
+        public Inspection GetInspectionBy(string id)
+        {
+            return new InspectionRepository().All().Single(x => x.Id == id);
+        }
     }
 }

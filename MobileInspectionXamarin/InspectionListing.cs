@@ -32,7 +32,7 @@ namespace MobileInspectionXamarin
             
             var inspectionIntent = new Intent(this, typeof(Inspection));
             inspectionIntent.PutExtra("isEdit", true);
-            inspectionIntent.PutExtra("IdOfInspectionToEdit", inspectionToEdit.Id);
+            inspectionIntent.PutExtra("idOfInspectionToEdit", inspectionToEdit.Id);
             StartActivity(inspectionIntent);  
         }
 

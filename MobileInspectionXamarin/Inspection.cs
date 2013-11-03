@@ -19,21 +19,52 @@ namespace MobileInspectionXamarin
         private ImageView imageView;
         File file;
         File dir;
+        private bool isEdit;
+        private string idOfInspectionToEdit;
+        private TextView title;
+        private TextView location;
+        private Button ok;
+        private Button cancel;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Inspection);
-
+            RetriveUiControls();
+            WireUpSaveButton();
+            WireUpCancel();
             SetUpCamera();
+            SetupEditMode();
+        }
+
+        private void RetriveUiControls()
+        {
+            title = FindViewById<TextView>(Resource.Inspection.title);
+            location = FindViewById<TextView>(Resource.Inspection.location);
+            imageView = FindViewById<ImageView>(Resource.Inspection.imageView1);
+            ok = FindViewById<Button>(Resource.Inspection.ok);
+            cancel = FindViewById<Button>(Resource.Inspection.cancel);
+        }
+
+        private void SetupEditMode()
+        {
+            isEdit = Intent.GetBooleanExtra("isEdit", false);
+            idOfInspectionToEdit = Intent.GetStringExtra("idOfInspectionToEdit");
+            if (isEdit)
+            {
+                var inspectionToEdit = new InspectionTask().GetInspectionBy(idOfInspectionToEdit);
+                title.Text = inspectionToEdit.Title;
+                location.Text = inspectionToEdit.Location;
+                file = new File(inspectionToEdit.FilePath);
+                DisplayImage();
+            }
         }
 
         private void SetUpCamera()
         {
             if (IsThereAnAppToTakePictures())
             {
-                WireUpSaveButton();
-                WireUpCancel();
+               
                 CreateDirectoryForPictures();
                 SetTakePictureButton();
             }
@@ -41,15 +72,11 @@ namespace MobileInspectionXamarin
 
         private void WireUpCancel()
         {
-            var cancel = FindViewById<Button>(Resource.Inspection.cancel);
             cancel.Click += (o, e) => Finish();
         }
 
         private void WireUpSaveButton()
         {
-            var ok = FindViewById<Button>(Resource.Inspection.ok);
-            var title = FindViewById<TextView>(Resource.Inspection.title);
-            var location = FindViewById<TextView>(Resource.Inspection.location);
             ok.Click += (o, e) => { new InspectionTask().Save(title.Text, location.Text,GetFilePath());Finish();};
         }
 
@@ -61,7 +88,7 @@ namespace MobileInspectionXamarin
         private void SetTakePictureButton()
         {
             var takePicture = FindViewById<Button>(Resource.Inspection.takePicture);
-            imageView = FindViewById<ImageView>(Resource.Inspection.imageView1);
+           
             takePicture.Click += TakeAPicture;
         }
 
@@ -108,6 +135,11 @@ namespace MobileInspectionXamarin
             // display in ImageView. We will resize the bitmap to fit the display
             // Loading the full sized image will consume to much memory 
             // and cause the application to crash.
+            DisplayImage();
+        }
+
+        private void DisplayImage()
+        {
             int height = imageView.Height;
             int width = Resources.DisplayMetrics.WidthPixels;
             using (Bitmap bitmap = file.Path.LoadAndResizeBitmap(width, height))
